@@ -51,15 +51,15 @@ public class Backpack {
         double topGreed = 0;
         int min = Integer.MAX_VALUE, mass = 0;
         Integer item = null;
-        for (Integer m = 0; m < items.size(); m++)
+        for (int m = 0; m < items.size(); m++)
             if (items.get(m).getGreed() > topGreed) {
                 topGreed = items.get(m).getGreed();
                 item = m;
                 mass = items.get(m).getIMass();
             }
         int greedFilled = Math.floorDiv(bp, mass);
-        for (int n = 0; n < items.size(); n++) {
-            int greed = (int) Math.floor((topGreed / (topGreed * 2 - items.get(n).getGreed())) * greedFilled);
+        for (Item value : items) {
+            int greed = (int) Math.floor((topGreed / (topGreed * 2 - value.getGreed())) * greedFilled);
             if (greed < min) min = greed;
         }
         if (min > 0)
@@ -157,11 +157,9 @@ public class Backpack {
                         Desktop.getDesktop().edit(backPack);
                     } else {
                         System.out.println("Файл Backpack.txt пуст!");
-                        continue;
                     }
                 } catch (FileNotFoundException e) {
                     System.out.println("Файл Backpack.txt в директории программы не найден!");
-                    continue;
                 }
             }
             else if (inputStr.equals("начать")) {
@@ -204,7 +202,7 @@ public class Backpack {
         return items;
     }
     private static String printItems(ArrayList<Item> items) {
-        String result = null;
+        String result;
         if (items.size() == 0)
             result = "Предметы не добавлены.\nМакс вес: " + bp/1000.0;
         else {
