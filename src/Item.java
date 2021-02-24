@@ -1,15 +1,14 @@
+import java.math.BigDecimal;
+
 class Item {
-    private double mass, price, greed;
-    private int imass;
-    Item(double m, double p){
-        mass = m;
-        price = p;
-        imass = (int) (mass * 1000);
-        greed = price / mass;
+    private final BigDecimal mass, price, greed;
+    Item(BigDecimal mass, BigDecimal price){
+        this.mass = mass;
+        this.price = price;
+        greed = price.divide(mass);
     }
 
-    double getPrice() { return price; }
-    double getMass() { return mass; }
-    int getIMass() { return imass; }
-    double getGreed() { return greed; }
+    BigDecimal getPrice() { return price; }
+    BigDecimal getMass() { return mass; }
+    BigDecimal getGreed() { return greed; }
 }
