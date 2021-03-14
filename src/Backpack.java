@@ -24,7 +24,7 @@ public class Backpack {
         ArrayList<Item> items = inputItems(input);
         removeUseless(items);
         int g = greed(items);
-        Set<String> results = new HashSet<String>();
+        Set<String> results = new HashSet<>();
         for (int n = 0; n < items.size(); n++)
             fillTheBackpack(g, n, result, items, results);
         double[] print = topResult(results, items);
