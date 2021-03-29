@@ -9,7 +9,7 @@ import java.util.*;
 public class Backpack {
     private static BigDecimal bp = BigDecimal.valueOf(30);
     private static final ArrayList<Items> results = new ArrayList<>();
-    private static ArrayList<Item> items;
+    private static final ArrayList<Item> items = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
         System.out.println("Введите параметры вещей для размещения в рюкзаке и его грузоподъемность.\n" +
@@ -17,29 +17,22 @@ public class Backpack {
                 "Для добавления предмета - \"вес цена\", для изменения грузоподъемности - \"вес\".\n" +
                 "Управление: \"Выход\", \"Начать\" расчет, \"Печать\" параметров на экран, прочитать \"Файл\".");
         Scanner input = new Scanner(System.in);
-        items = inputItems(input);
+        inputItems(input);
         removeUseless();
         final Items greedFilled = greed();
         for (int n = items.size() - 1; n >= 0; n--)
             fillTheBackpack(n, new Items(greedFilled));
-        //----------
         topResultPrint();
         System.out.print("Нажмите Enter для завершения.");
         input.nextLine();
         input.close();
     }
 
+    // проверено, тестировать правильность выбора
     private static void topResultPrint() {
-        System.out.println("---------------------------------\n" +
-                "Оптимальное заполнение рюкзака:");
-        for (int n = 0; n < print.length - 2; n++) {
-            if (print[n] > 0)
-                System.out.println(print[n] + " предметов: " + items.get(n).getMass() +
-                        " вес " + items.get(n).getPrice() + " цена.");
-        }
-        System.out.println("Итоговая ценность: " + Math.round(print[print.length - 2] * 1000000)/1000000.0 +
-                "\nЗаполненность весом: " + print[print.length - 1]/1000.0 + " из " + bp);
-        System.out.println("---------------------------------");
+        System.out.println("Оптимальное заполнение рюкзака:");
+        Collections.sort(results);
+        results.get(0).print();
     }
 
     // проверено, тест формулу
@@ -81,9 +74,9 @@ public class Backpack {
     // проверено, тест сортировки и удаления
     static void removeUseless() {
         Collections.sort(items);
-        for (int n = items.size() - 1; n > 0; n--) {
+        for (int n = items.size() - 1; n >= 0; n--) {
             BigDecimal firstMass = items.get(n).getMass();
-            if (firstMass.compareTo(bp) > 0) {
+            if (firstMass.compareTo(bp) > 0 || items.get(n).getPrice().compareTo(BigDecimal.ZERO) <= 0) {
                 items.remove(n);
                 continue;
             }
@@ -103,8 +96,7 @@ public class Backpack {
     }
 
     // проверено, тест добавления вещей, убрать открытие файла
-    private static ArrayList<Item> inputItems(Scanner input) throws IOException {
-        ArrayList<Item> items = new ArrayList<>();
+    private static void inputItems(Scanner input) throws IOException {
         String inputStr;
         label:
         while (true) {
@@ -137,7 +129,7 @@ public class Backpack {
                 case "выход":
                     System.exit(0);
                 case "печать":
-                    System.out.print(printItems(items));
+                    printItems();
                     break;
                 default:
                     String item = inputStr.replace(",", ".").replaceAll("[^0-9 .]", "");
@@ -163,27 +155,24 @@ public class Backpack {
                     break;
             }
         }
-        return items;
     }
 
-    private static String printItems(ArrayList<Item> items) {
-        String result;
+    private static void printItems() {
         if (items.size() == 0)
-            result = "Предметы не добавлены.\nМакс вес: " + bp/1000.0;
+            System.out.println("Предметы не добавлены.\nМакс вес: " + bp);
         else {
-            result = "-----------------------\n" + "|    Вес   |   Цена   |\n" +
-                    "-----------------------\n";
+            StringBuilder print = new StringBuilder();
+            print.append("-----------------------\n")
+                    .append("|    Вес   |   Цена   |\n")
+                    .append("-----------------------\n");
             Formatter f = new Formatter();
             for (Item i : items) {
-                f.format("|%10.3f|%10.3f|%n", i.getMass(), i.getPrice());
+                f.format("|%10.5f|%10.5f|%n", i.getMass(), i.getPrice());
             }
-            result += f;
+            f.format("| Макс вес: %10.5f|%n", bp);
+            print.append(f);
             f.close();
-            Formatter b = new Formatter();
-            b.format("| Макс вес: %10.3f|%n", bp/1000.0);
-            result += "-----------------------\n" + b + "-----------------------\n";
-            b.close();
+            System.out.println(print);
         }
-        return result;
     }
 }
