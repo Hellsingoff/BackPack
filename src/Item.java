@@ -12,7 +12,7 @@ class Item implements Comparable<Item> {
 
     public int compareTo(Item item) {
         if (item.getMass().equals(mass))
-            return price.compareTo(item.getPrice());
+            return -price.compareTo(item.getPrice());
         return mass.compareTo(item.getMass());
     }
 

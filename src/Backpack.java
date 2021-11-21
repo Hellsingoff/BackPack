@@ -18,8 +18,8 @@ public class Backpack {
                 "Управление: \"Выход\", \"Начать\" расчет, \"Печать\" параметров на экран, прочитать \"Файл\".");
         Scanner input = new Scanner(System.in);
         inputItems(input);
-        removeUseless();
-        final Items greedFilled = greed();
+        removeUseless(items);
+        final Items greedFilled = greed(items);
         for (int n = items.size() - 1; n >= 0; n--)
             fillTheBackpack(n, new Items(greedFilled));
         topResultPrint();
@@ -36,15 +36,15 @@ public class Backpack {
     }
 
     // проверено, тест формулу
-    private static Items greed() {
+    private static Items greed(ArrayList<Item> items) {
         int min = Integer.MAX_VALUE;
         Item topItem = new Item(BigDecimal.ONE, BigDecimal.ZERO);
-        for (Item item : items)
+        for (Item item : Backpack.items)
             if (item.getGreed().compareTo(topItem.getGreed()) >= 0)
                 topItem = item;
         int greedFilled = bp.divide(topItem.getMass(), RoundingMode.FLOOR).intValue();
         BigDecimal topGreed = topItem.getGreed();
-        for (Item item : items) {
+        for (Item item : Backpack.items) {
             BigDecimal temp = topGreed.multiply(BigDecimal.valueOf(2)).subtract(item.getGreed());
             int num = topGreed.divide(temp, RoundingMode.FLOOR).multiply(BigDecimal.valueOf(greedFilled)).intValue();
             if (num < min) min = num;
@@ -72,8 +72,9 @@ public class Backpack {
     }
 
     // проверено, тест сортировки и удаления
-    static void removeUseless() {
+    static void removeUseless(ArrayList<Item> items) {
         Collections.sort(items);
+        outsideLoop:
         for (int n = items.size() - 1; n >= 0; n--) {
             BigDecimal firstMass = items.get(n).getMass();
             if (firstMass.compareTo(bp) > 0 || items.get(n).getPrice().compareTo(BigDecimal.ZERO) <= 0) {
@@ -85,8 +86,10 @@ public class Backpack {
                         .multiply(items.get(j).getPrice()).compareTo(items.get(n).getPrice()) >= 0;
                 boolean useless2 = firstMass.equals(items.get(j).getMass());
                 boolean useless3 = items.get(n).getPrice().compareTo(items.get(j).getPrice()) < 0;
-                if (useless1 || useless2 || useless3)
+                if (useless1 || useless2 || useless3) {
                     items.remove(n);
+                    continue outsideLoop;
+                }
             }
         }
         if (items.size() == 0) {
@@ -169,7 +172,7 @@ public class Backpack {
             for (Item i : items) {
                 f.format("|%10.5f|%10.5f|%n", i.getMass(), i.getPrice());
             }
-            f.format("| Макс вес: %10.5f|%n", bp);
+            f.format("-----------------------%n| Макс вес: %10.5f|%n-----------------------", bp);
             print.append(f);
             f.close();
             System.out.println(print);
