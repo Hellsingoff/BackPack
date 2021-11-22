@@ -34,7 +34,7 @@ public class Items implements Comparable<Items> {
         mass = mass.add(item.getMass().multiply(BigDecimal.valueOf(num)));
     }
 
-    public void print() {
+    public StringBuilder stringBuilder() {
         System.out.println("----------------------------");
         System.out.println("Суммарная ценность: " + price);
         System.out.println("Суммарная масса: " + mass);

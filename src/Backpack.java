@@ -8,43 +8,47 @@ import java.util.*;
 
 public class Backpack {
     private static BigDecimal bp = BigDecimal.valueOf(30);
-    private static final ArrayList<Items> results = new ArrayList<>();
-    private static final ArrayList<Item> items = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
         System.out.println("Введите параметры вещей для размещения в рюкзаке и его грузоподъемность.\n" +
                 "Значения округляются до тысячных долей.\n" +
                 "Для добавления предмета - \"вес цена\", для изменения грузоподъемности - \"вес\".\n" +
                 "Управление: \"Выход\", \"Начать\" расчет, \"Печать\" параметров на экран, прочитать \"Файл\".");
+        final ArrayList<Item> itemList = new ArrayList<>();
         Scanner input = new Scanner(System.in);
-        inputItems(input);
-        removeUseless(items);
-        final Items greedFilled = greed(items);
-        for (int n = items.size() - 1; n >= 0; n--)
-            fillTheBackpack(n, new Items(greedFilled));
-        topResultPrint();
+        inputItems(input, itemList);
+        removeUseless(itemList);
+        final Items greedFilled = greed(itemList);
+        final ArrayList<Items> results = new ArrayList<>();
+        fillTheBackpack(greedFilled, itemList, results);
+        System.out.println(topResultToString(results));
         System.out.print("Нажмите Enter для завершения.");
         input.nextLine();
         input.close();
     }
 
+    private static void fillTheBackpack(Items greedFilled, ArrayList<Item> itemList, ArrayList<Items> results) {
+        for (int n = itemList.size() - 1; n >= 0; n--)
+            iterate(new Items(greedFilled), itemList, n, results);
+    }
+
     // проверено, тестировать правильность выбора
-    private static void topResultPrint() {
+    private static String topResultToString(ArrayList<Items> results) {
         System.out.println("Оптимальное заполнение рюкзака:");
         Collections.sort(results);
-        results.get(0).print();
+        return results.get(0).toString();
     }
 
     // проверено, тест формулу
     private static Items greed(ArrayList<Item> items) {
         int min = Integer.MAX_VALUE;
         Item topItem = new Item(BigDecimal.ONE, BigDecimal.ZERO);
-        for (Item item : Backpack.items)
+        for (Item item : items)
             if (item.getGreed().compareTo(topItem.getGreed()) >= 0)
                 topItem = item;
         int greedFilled = bp.divide(topItem.getMass(), RoundingMode.FLOOR).intValue();
         BigDecimal topGreed = topItem.getGreed();
-        for (Item item : Backpack.items) {
+        for (Item item : items) {
             BigDecimal temp = topGreed.multiply(BigDecimal.valueOf(2)).subtract(item.getGreed());
             int num = topGreed.divide(temp, RoundingMode.FLOOR).multiply(BigDecimal.valueOf(greedFilled)).intValue();
             if (num < min) min = num;
@@ -55,15 +59,15 @@ public class Backpack {
     }
 
     // проверено, протестировать перебор
-    private static void fillTheBackpack(int n, Items path) {
+    private static void iterate(Items path, ArrayList<Item> itemList, int n, ArrayList<Items> results) {
         for (; n >= 0; n--) {
             BigDecimal availableMass = bp.subtract(path.getMass());
-            if (availableMass.compareTo(items.get(n).getMass()) >= 0) {
-                path.add(items.get(n));
-                fillTheBackpack(n, path);
+            if (availableMass.compareTo(itemList.get(n).getMass()) >= 0) {
+                path.add(itemList.get(n));
+                iterate(path, itemList, n, results);
             }
-            else if (availableMass.compareTo(items.get(0).getMass()) >= 0)
-                fillTheBackpack(n - 1, new Items(path));
+            else if (availableMass.compareTo(itemList.get(0).getMass()) >= 0)
+                iterate(new Items(path), itemList, n - 1, results);
             else {
                 results.add(path);
                 break;
@@ -99,7 +103,7 @@ public class Backpack {
     }
 
     // проверено, тест добавления вещей, убрать открытие файла
-    private static void inputItems(Scanner input) throws IOException {
+    private static void inputItems(Scanner input, ArrayList<Item> items) throws IOException {
         String inputStr;
         label:
         while (true) {
@@ -132,7 +136,7 @@ public class Backpack {
                 case "выход":
                     System.exit(0);
                 case "печать":
-                    printItems();
+                    printItems(items);
                     break;
                 default:
                     String item = inputStr.replace(",", ".").replaceAll("[^0-9 .]", "");
@@ -160,7 +164,7 @@ public class Backpack {
         }
     }
 
-    private static void printItems() {
+    private static void printItems(ArrayList<Item> items) {
         if (items.size() == 0)
             System.out.println("Предметы не добавлены.\nМакс вес: " + bp);
         else {
