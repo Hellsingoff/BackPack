@@ -22,7 +22,7 @@ public class Backpack {
         final ArrayList<Items> results = new ArrayList<>();
         fillTheBackpack(greedFilled, itemList, results);
         System.out.println(topResultToString(results));
-        System.out.print("Нажмите Enter для завершения.");
+        System.out.print("----------------------------\nНажмите Enter для завершения.");
         input.nextLine();
         input.close();
     }
@@ -32,14 +32,11 @@ public class Backpack {
             iterate(new Items(greedFilled), itemList, n, results);
     }
 
-    // проверено, тестировать правильность выбора
     private static String topResultToString(ArrayList<Items> results) {
-        System.out.println("Оптимальное заполнение рюкзака:");
         Collections.sort(results);
-        return results.get(0).toString();
+        return "Оптимальное заполнение рюкзака:\n" + results.get(0).stringBuilder();
     }
 
-    // проверено, тест формулу
     private static Items greed(ArrayList<Item> items) {
         int min = Integer.MAX_VALUE;
         Item topItem = new Item(BigDecimal.ONE, BigDecimal.ZERO);
@@ -58,7 +55,6 @@ public class Backpack {
         return result;
     }
 
-    // проверено, протестировать перебор
     private static void iterate(Items path, ArrayList<Item> itemList, int n, ArrayList<Items> results) {
         for (; n >= 0; n--) {
             BigDecimal availableMass = bp.subtract(path.getMass());
@@ -75,7 +71,6 @@ public class Backpack {
         }
     }
 
-    // проверено, тест сортировки и удаления
     static void removeUseless(ArrayList<Item> items) {
         Collections.sort(items);
         outsideLoop:
@@ -102,7 +97,6 @@ public class Backpack {
         }
     }
 
-    // проверено, тест добавления вещей, убрать открытие файла
     private static void inputItems(Scanner input, ArrayList<Item> items) throws IOException {
         String inputStr;
         label:
@@ -140,6 +134,10 @@ public class Backpack {
                     break;
                 default:
                     String item = inputStr.replace(",", ".").replaceAll("[^0-9 .]", "");
+                    if (item.equals("")){
+                        System.out.println("Введено не число!");
+                        break;
+                    }
                     String[] arr = item.split(" ");
                     if (arr.length == 2) {
                         try {
@@ -147,19 +145,20 @@ public class Backpack {
                             BigDecimal price = BigDecimal.valueOf(Double.parseDouble(arr[1]));
                             if (mass.compareTo(BigDecimal.ZERO) <= 0) {
                                 System.out.println("Масса должна быть больше 0.");
-                                continue label;
+                                break;
                             }
                             items.add(new Item(mass, price));
                             System.out.println("Добавлено: масса " + mass + " цена " + price);
+                            System.out.println("Сейчас добавлено " + items.size() + " предметов.");
                         } catch (NumberFormatException e) {
                             System.out.println("Ошибка! Введены не числа?");
                         }
                     } else if (arr.length == 1) {
                         bp = BigDecimal.valueOf(Double.parseDouble(arr[0]));
                         System.out.println("Грузоподъемность рюкзака установлена на " + bp);
-                    } else System.out.println("Ошибка. Введены не 2 числа!");
-                    System.out.println("Сейчас добавлено " + items.size() + " предметов.");
-                    break;
+                    } else {
+                        System.out.println("Ошибка. Введены не 2 числа!");
+                    }
             }
         }
     }

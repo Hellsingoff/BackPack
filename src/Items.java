@@ -35,13 +35,21 @@ public class Items implements Comparable<Items> {
     }
 
     public StringBuilder stringBuilder() {
-        System.out.println("----------------------------");
-        System.out.println("Суммарная ценность: " + price);
-        System.out.println("Суммарная масса: " + mass);
-        for (Item item : list.keySet()) {
-            System.out.println("Предмет весом " + item.getMass() + " и стоимостью " +
-                    item.getPrice() + " - " + list.get(item) + " штук.");
-        }
+        StringBuilder toPrint = new StringBuilder();
+        toPrint.append("----------------------------\n")
+                .append("Суммарная ценность: ")
+                .append(price)
+                .append("\nСуммарная масса: ")
+                .append(mass);
+        for (Item item : list.keySet())
+            toPrint.append("\nПредмет весом ")
+                    .append(item.getMass())
+                    .append(" и стоимостью ")
+                    .append(item.getPrice())
+                    .append(" - ")
+                    .append(list.get(item))
+                    .append(" штук.");
+        return toPrint;
     }
 
     public int compareTo(Items items) {

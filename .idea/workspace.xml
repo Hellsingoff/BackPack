@@ -23,8 +23,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="92bee67e-20ee-4c23-9b39-1e1f453e36d0" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/BackpackTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backpack.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Backpack.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Backpack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backpack.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Items.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Items.java" afterDir="false" />
     </list>
