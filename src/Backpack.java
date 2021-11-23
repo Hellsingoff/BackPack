@@ -27,7 +27,7 @@ public class Backpack {
         input.close();
     }
 
-    private static void fillTheBackpack(Items greedFilled, ArrayList<Item> itemList, ArrayList<Items> results) {
+    protected static void fillTheBackpack(Items greedFilled, ArrayList<Item> itemList, ArrayList<Items> results) {
         for (int n = itemList.size() - 1; n >= 0; n--)
             iterate(new Items(greedFilled), itemList, n, results);
     }
