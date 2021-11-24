@@ -20,16 +20,29 @@ public class Backpack {
         removeUseless(itemList);
         final Items greedFilled = greed(itemList);
         final ArrayList<Items> results = new ArrayList<>();
-        fillTheBackpack(greedFilled, itemList, results);
+        fillTheBackpack(greedFilled, itemList, 0, results);
         System.out.println(topResultToString(results));
         System.out.print("----------------------------\nНажмите Enter для завершения.");
         input.nextLine();
         input.close();
     }
 
-    protected static void fillTheBackpack(Items greedFilled, ArrayList<Item> itemList, ArrayList<Items> results) {
-        for (int n = itemList.size() - 1; n >= 0; n--)
-            iterate(new Items(greedFilled), itemList, n, results);
+    protected static void fillTheBackpack(Items greedFilled, ArrayList<Item> itemList, int n, ArrayList<Items> results){
+        for (; n < itemList.size(); n++) {
+            Items items = new Items(greedFilled);
+            for (int j = n; j < itemList.size(); j++) {
+                BigDecimal availableMass = bp.subtract(items.getMass());
+                if (availableMass.compareTo(itemList.get(n).getMass()) >= 0) {
+                    items.add(itemList.get(n));
+                    fillTheBackpack(new Items(items), itemList, n, results);
+                } else if (availableMass.compareTo(itemList.get(itemList.size() - 1).getMass()) >= 0)
+                    fillTheBackpack(new Items(items), itemList, n + 1, results);
+                else {
+                    results.add(items);
+                    break;
+                }
+            }
+        }
     }
 
     private static String topResultToString(ArrayList<Items> results) {
@@ -53,22 +66,6 @@ public class Backpack {
         Items result = new Items();
         if (min > 0) result.add(topItem, min);
         return result;
-    }
-
-    private static void iterate(Items path, ArrayList<Item> itemList, int n, ArrayList<Items> results) {
-        for (; n >= 0; n--) {
-            BigDecimal availableMass = bp.subtract(path.getMass());
-            if (availableMass.compareTo(itemList.get(n).getMass()) >= 0) {
-                path.add(itemList.get(n));
-                iterate(path, itemList, n, results);
-            }
-            else if (availableMass.compareTo(itemList.get(0).getMass()) >= 0)
-                iterate(new Items(path), itemList, n - 1, results);
-            else {
-                results.add(path);
-                break;
-            }
-        }
     }
 
     static void removeUseless(ArrayList<Item> items) {

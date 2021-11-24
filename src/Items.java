@@ -13,7 +13,7 @@ public class Items implements Comparable<Items> {
     }
 
     Items(Items items) {
-        list = items.getList();
+        list = new HashMap<>(items.getList());
         price = items.getPrice();
         mass = items.getMass();
     }
