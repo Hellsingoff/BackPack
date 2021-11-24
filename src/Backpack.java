@@ -19,35 +19,39 @@ public class Backpack {
         inputItems(input, itemList);
         removeUseless(itemList);
         final Items greedFilled = greed(itemList);
-        final ArrayList<Items> results = new ArrayList<>();
-        fillTheBackpack(greedFilled, itemList, 0, results);
-        System.out.println(topResultToString(results));
+        Items result = new Items();
+        fillTheBackpack(greedFilled, itemList, result);
+        System.out.println(topResultToString(result));
         System.out.print("----------------------------\nНажмите Enter для завершения.");
         input.nextLine();
         input.close();
     }
 
-    protected static void fillTheBackpack(Items greedFilled, ArrayList<Item> itemList, int n, ArrayList<Items> results){
-        for (; n < itemList.size(); n++) {
+    protected static void fillTheBackpack(Items greedFilled, ArrayList<Item> itemList, Items result){
+        fillTheBackpack(greedFilled, itemList, itemList.size() - 1, result);
+    }
+
+    protected static void fillTheBackpack(Items greedFilled, ArrayList<Item> itemList, int n, Items result){
+        for (; n >= 0; n--) {
             Items items = new Items(greedFilled);
-            for (int j = n; j < itemList.size(); j++) {
+            for (int j = n; j >= 0; j--) {
                 BigDecimal availableMass = bp.subtract(items.getMass());
                 if (availableMass.compareTo(itemList.get(n).getMass()) >= 0) {
                     items.add(itemList.get(n));
-                    fillTheBackpack(new Items(items), itemList, n, results);
-                } else if (availableMass.compareTo(itemList.get(itemList.size() - 1).getMass()) >= 0)
-                    fillTheBackpack(new Items(items), itemList, n + 1, results);
+                    fillTheBackpack(new Items(items), itemList, n, result);
+                } else if (availableMass.compareTo(itemList.get(0).getMass()) >= 0)
+                    fillTheBackpack(new Items(items), itemList, n - 1, result);
                 else {
-                    results.add(items);
+                    if (result.getPrice().compareTo(items.getPrice()) < 0)
+                        result = new Items(items);
                     break;
                 }
             }
         }
     }
 
-    private static String topResultToString(ArrayList<Items> results) {
-        Collections.sort(results);
-        return "Оптимальное заполнение рюкзака:\n" + results.get(0).stringBuilder();
+    private static String topResultToString(Items result) {
+        return "Оптимальное заполнение рюкзака:\n" + result.stringBuilder();
     }
 
     private static Items greed(ArrayList<Item> items) {
@@ -79,10 +83,10 @@ public class Backpack {
             }
             for (int j = n - 1; j >= 0; j--) {
                 boolean useless1 = firstMass.divide(items.get(j).getMass(), RoundingMode.FLOOR)
+                        .setScale(0, RoundingMode.FLOOR)
                         .multiply(items.get(j).getPrice()).compareTo(items.get(n).getPrice()) >= 0;
-                boolean useless2 = firstMass.equals(items.get(j).getMass());
-                boolean useless3 = items.get(n).getPrice().compareTo(items.get(j).getPrice()) < 0;
-                if (useless1 || useless2 || useless3) {
+                boolean useless2 = items.get(n).getPrice().compareTo(items.get(j).getPrice()) < 0;
+                if (useless1 || useless2) {
                     items.remove(n);
                     continue outsideLoop;
                 }
