@@ -18,10 +18,9 @@ class BackpackTest {
         itemList.add(item1);
         itemList.add(item2);
         Collections.sort(itemList);
-        Items[] result = new Items[] {new Items()};
-        Backpack.fillTheBackpack(new Items(), itemList, result);
-        assertEquals(result[0].getPrice(), BigDecimal.valueOf(39));
-        System.out.println("Тест наполнения успешно пройден:\n"+result[0].stringBuilder()+"\n------------------------");
+        Items result = Backpack.fillTheBackpack(new Items(), itemList);
+        assertEquals(result.getPrice(), BigDecimal.valueOf(39));
+        System.out.println("Тест наполнения успешно пройден:\n" + result.stringBuilder() +"\n------------------------");
     }
 
     @Test
@@ -31,16 +30,14 @@ class BackpackTest {
         int itemsCounter = 0;
         for (int n = 0; n < tests; n++) {
             final ArrayList<Item> itemList = new ArrayList<>();
-            Items[] result = new Items[] {new Items()};
-            Items[] cleanResult = new Items[] {new Items()};
             for (int i = 0; i < itemsNumber; i++)
-                itemList.add(new Item(BigDecimal.valueOf(Math.random()*30+10), BigDecimal.valueOf(Math.random()*30+10)));
+                itemList.add(new Item(BigDecimal.valueOf(Math.random()*30+1), BigDecimal.valueOf(Math.random()*30+1)));
             ArrayList<Item> clearedList = new ArrayList<>(itemList);
             Backpack.removeUseless(clearedList);
-            Backpack.fillTheBackpack(new Items(), clearedList, cleanResult);
-            Backpack.fillTheBackpack(new Items(), itemList, result);
+            Items cleanResult = Backpack.fillTheBackpack(new Items(), clearedList);
+            Items result = Backpack.fillTheBackpack(new Items(), itemList);
             itemsCounter += clearedList.size();
-            assertEquals(result[0].getPrice(), cleanResult[0].getPrice());
+            assertEquals(result.getPrice(), cleanResult.getPrice());
         }
         System.out.println("Тест удаления успешно пройден.\n" +
                 "Удалено " + (1 - ((double) itemsCounter / (tests*itemsNumber))) * 100 + "% предметов\n" +

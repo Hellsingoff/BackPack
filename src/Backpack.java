@@ -19,16 +19,17 @@ public class Backpack {
         inputItems(input, itemList);
         removeUseless(itemList);
         final Items greedFilled = greed(itemList);
-        Items[] result = new Items[] {new Items()};
-        fillTheBackpack(greedFilled, itemList, result);
-        System.out.println(topResultToString(result[0]));
+        Items result = fillTheBackpack(greedFilled, itemList);
+        System.out.println(topResultToString(result));
         System.out.print("----------------------------\nНажмите Enter для завершения.");
         input.nextLine();
         input.close();
     }
 
-    protected static void fillTheBackpack(Items greedFilled, ArrayList<Item> itemList, Items[] result){
+    protected static Items fillTheBackpack(Items greedFilled, ArrayList<Item> itemList){
+        Items[] result = new Items[] {new Items()};
         fillTheBackpack(greedFilled, itemList, itemList.size() - 1, result);
+        return result[0];
     }
 
     protected static void fillTheBackpack(Items greedFilled, ArrayList<Item> itemList, int n, Items[] result){
