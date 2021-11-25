@@ -1,22 +1,20 @@
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-
 class Item implements Comparable<Item> {
-    private final BigDecimal mass, price, greed;
+    private final int mass, price;
+    private final double greed;
 
-    Item(BigDecimal mass, BigDecimal price){
+    Item(int mass, int price){
         this.mass = mass;
         this.price = price;
-        greed = price.divide(mass, 10, RoundingMode.HALF_UP);
+        greed = (double) price/mass;
     }
 
     public int compareTo(Item item) {
-        if (item.getMass().equals(mass))
-            return -price.compareTo(item.getPrice());
-        return mass.compareTo(item.getMass());
+        if (item.getMass() == mass)
+            return Integer.compare(item.getPrice(), price);
+        return Integer.compare(mass, item.getMass());
     }
 
-    BigDecimal getPrice() { return price; }
-    BigDecimal getMass() { return mass; }
-    BigDecimal getGreed() { return greed; }
+    int getPrice() { return price; }
+    int getMass() { return mass; }
+    double getGreed() { return greed; }
 }

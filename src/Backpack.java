@@ -2,25 +2,22 @@ import java.awt.Desktop;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.*;
 
 public class Backpack {
-    private static BigDecimal bp = BigDecimal.valueOf(30);
+    private static int bp = 30;
 
     public static void main(String[] args) throws IOException {
         System.out.println("Введите параметры вещей для размещения в рюкзаке и его грузоподъемность.\n" +
                 "Значения округляются до тысячных долей.\n" +
                 "Для добавления предмета - \"вес цена\", для изменения грузоподъемности - \"вес\".\n" +
                 "Управление: \"Выход\", \"Начать\" расчет, \"Печать\" параметров на экран, прочитать \"Файл\".");
-        final ArrayList<Item> itemList = new ArrayList<>();
         Scanner input = new Scanner(System.in);
-        inputItems(input, itemList);
+        final ArrayList<Item> itemList = inputItems(input);
         removeUseless(itemList);
         final Items greedFilled = greed(itemList);
         Items result = fillTheBackpack(greedFilled, itemList);
-        System.out.println(topResultToString(result));
+        System.out.println(result);
         System.out.print("----------------------------\nНажмите Enter для завершения.");
         input.nextLine();
         input.close();
@@ -36,14 +33,14 @@ public class Backpack {
         for (; n >= 0; n--) {
             Items items = new Items(greedFilled);
             for (int j = n; j >= 0; j--) {
-                BigDecimal availableMass = bp.subtract(items.getMass());
-                if (availableMass.compareTo(itemList.get(n).getMass()) >= 0) {
+                int availableMass = bp - items.getMass();
+                if (availableMass >= itemList.get(n).getMass()) {
                     items.add(itemList.get(n));
                     fillTheBackpack(new Items(items), itemList, n, result);
-                } else if (availableMass.compareTo(itemList.get(0).getMass()) >= 0)
+                } else if (availableMass >= itemList.get(0).getMass())
                     fillTheBackpack(new Items(items), itemList, n - 1, result);
                 else {
-                    if (result[0].getPrice().compareTo(items.getPrice()) < 0)
+                    if (result[0].getPrice() < items.getPrice())
                         result[0] = items;
                     break;
                 }
@@ -51,25 +48,21 @@ public class Backpack {
         }
     }
 
-    private static String topResultToString(Items result) {
-        return "Оптимальное заполнение рюкзака:\n" + result.stringBuilder();
-    }
-
-    private static Items greed(ArrayList<Item> items) {
+    static Items greed(ArrayList<Item> items) {
         int min = Integer.MAX_VALUE;
-        Item topItem = new Item(BigDecimal.ONE, BigDecimal.ZERO);
+        Item topItem = new Item(1, 1);
         for (Item item : items)
-            if (item.getGreed().compareTo(topItem.getGreed()) >= 0)
+            if (item.getGreed() >= topItem.getGreed())
                 topItem = item;
-        int greedFilled = bp.divide(topItem.getMass(), RoundingMode.FLOOR).intValue();
-        BigDecimal topGreed = topItem.getGreed();
+        int greedFilled = bp/topItem.getMass();
+        double topGreed = topItem.getGreed();
         for (Item item : items) {
-            BigDecimal temp = topGreed.multiply(BigDecimal.valueOf(2)).subtract(item.getGreed());
-            int num = topGreed.divide(temp, RoundingMode.FLOOR).multiply(BigDecimal.valueOf(greedFilled)).intValue();
+            double temp = topGreed*2 - item.getGreed();
+            int num = (int) (topGreed / temp * greedFilled);
             if (num < min) min = num;
         }
         Items result = new Items();
-        if (min > 0) result.add(topItem, min);
+        if (min > 0 && min < Integer.MAX_VALUE) result.add(topItem, min);
         return result;
     }
 
@@ -77,16 +70,14 @@ public class Backpack {
         Collections.sort(items);
         outsideLoop:
         for (int n = items.size() - 1; n >= 0; n--) {
-            BigDecimal firstMass = items.get(n).getMass();
-            if (firstMass.compareTo(bp) > 0 || items.get(n).getPrice().compareTo(BigDecimal.ZERO) <= 0) {
+            int firstMass = items.get(n).getMass();
+            if (firstMass > bp || items.get(n).getPrice() <= 0) {
                 items.remove(n);
                 continue;
             }
             for (int j = n - 1; j >= 0; j--) {
-                boolean useless1 = firstMass.divide(items.get(j).getMass(), RoundingMode.FLOOR)
-                        .setScale(0, RoundingMode.FLOOR)
-                        .multiply(items.get(j).getPrice()).compareTo(items.get(n).getPrice()) >= 0;
-                boolean useless2 = items.get(n).getPrice().compareTo(items.get(j).getPrice()) < 0;
+                boolean useless1 = firstMass/items.get(j).getMass()*items.get(j).getPrice() >= items.get(n).getPrice();
+                boolean useless2 = items.get(n).getPrice() < items.get(j).getPrice();
                 if (useless1 || useless2) {
                     items.remove(n);
                     continue outsideLoop;
@@ -99,7 +90,8 @@ public class Backpack {
         }
     }
 
-    private static void inputItems(Scanner input, ArrayList<Item> items) throws IOException {
+    private static ArrayList<Item> inputItems(Scanner input) throws IOException {
+        ArrayList<Item> itemList = new ArrayList<>();
         String inputStr;
         label:
         while (true) {
@@ -109,15 +101,13 @@ public class Backpack {
                     String path = new File("").getAbsolutePath() + File.separator + "Backpack.txt";
                     try {
                         Scanner reader = new Scanner(new File(path));
-                        if (reader.hasNextBigDecimal())
-                            bp = reader.nextBigDecimal();
+                        if (reader.hasNextInt())
+                            bp = reader.nextInt();
                         while (reader.hasNextLine()) {
                             String line = reader.nextLine();
                             if (line.isBlank()) continue;
                             String[] item = line.split(" ");
-                            BigDecimal mass = BigDecimal.valueOf(Double.parseDouble(item[0]));
-                            BigDecimal price = BigDecimal.valueOf(Double.parseDouble(item[1]));
-                            items.add(new Item(mass, price));
+                            itemList.add(new Item(Integer.parseInt(item[0]), Integer.parseInt(item[1])));
                         }
                         reader.close();
                         Desktop.getDesktop().edit(new File(path)); //test
@@ -126,16 +116,16 @@ public class Backpack {
                     }
                     break;
                 case "начать":
-                    if (items.size() > 0) break label;
+                    if (itemList.size() > 0) break label;
                     else System.out.println("Сначала добавьте предметы!");
                     break;
                 case "выход":
                     System.exit(0);
                 case "печать":
-                    printItems(items);
+                    printItems(itemList);
                     break;
                 default:
-                    String item = inputStr.replace(",", ".").replaceAll("[^0-9 .]", "");
+                    String item = inputStr.replace(",", ".").replaceAll("[^0-9 ]", "");
                     if (item.equals("")){
                         System.out.println("Введено не число!");
                         break;
@@ -143,26 +133,27 @@ public class Backpack {
                     String[] arr = item.split(" ");
                     if (arr.length == 2) {
                         try {
-                            BigDecimal mass = BigDecimal.valueOf(Double.parseDouble(arr[0]));
-                            BigDecimal price = BigDecimal.valueOf(Double.parseDouble(arr[1]));
-                            if (mass.compareTo(BigDecimal.ZERO) <= 0) {
+                            int mass = Integer.parseInt(arr[0]);
+                            int price = Integer.parseInt(arr[1]);
+                            if (mass <= 0) {
                                 System.out.println("Масса должна быть больше 0.");
                                 break;
                             }
-                            items.add(new Item(mass, price));
+                            itemList.add(new Item(mass, price));
                             System.out.println("Добавлено: масса " + mass + " цена " + price);
-                            System.out.println("Сейчас добавлено " + items.size() + " предметов.");
+                            System.out.println("Сейчас добавлено " + itemList.size() + " предметов.");
                         } catch (NumberFormatException e) {
                             System.out.println("Ошибка! Введены не числа?");
                         }
                     } else if (arr.length == 1) {
-                        bp = BigDecimal.valueOf(Double.parseDouble(arr[0]));
+                        bp = Integer.parseInt(arr[0]);
                         System.out.println("Грузоподъемность рюкзака установлена на " + bp);
                     } else {
                         System.out.println("Ошибка. Введены не 2 числа!");
                     }
             }
         }
+        return itemList;
     }
 
     private static void printItems(ArrayList<Item> items) {
@@ -175,9 +166,9 @@ public class Backpack {
                     .append("-----------------------\n");
             Formatter f = new Formatter();
             for (Item i : items) {
-                f.format("|%10.5f|%10.5f|%n", i.getMass(), i.getPrice());
+                f.format("|%10d|%10d|%n", i.getMass(), i.getPrice());
             }
-            f.format("-----------------------%n| Макс вес: %10.5f|%n-----------------------", bp);
+            f.format("-----------------------%n| Макс вес: %10d|%n-----------------------", bp);
             print.append(f);
             f.close();
             System.out.println(print);

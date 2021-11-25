@@ -1,15 +1,14 @@
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Items implements Comparable<Items> {
     private final Map<Item, Integer> list;
-    private BigDecimal price, mass;
+    private int price, mass;
 
     Items() {
         list = new HashMap<>();
-        price = BigDecimal.ZERO;
-        mass = BigDecimal.ZERO;
+        price = 0;
+        mass = 0;
     }
 
     Items(Items items) {
@@ -22,22 +21,21 @@ public class Items implements Comparable<Items> {
         if (list.containsKey(item))
             list.put(item, list.get(item) + 1);
         else list.put(item, 1);
-        price = price.add(item.getPrice());
-        mass = mass.add(item.getMass());
+        price += item.getPrice();
+        mass += item.getMass();
     }
 
     public void add(Item item, int num) {
         if (list.containsKey(item))
             list.put(item, list.get(item) + num);
         else list.put(item, num);
-        price = price.add(item.getPrice().multiply(BigDecimal.valueOf(num)));
-        mass = mass.add(item.getMass().multiply(BigDecimal.valueOf(num)));
+        price += item.getPrice() * num;
+        mass += item.getMass() * num;
     }
 
-    public StringBuilder stringBuilder() {
+    public String toString() {
         StringBuilder toPrint = new StringBuilder();
-        toPrint.append("----------------------------\n")
-                .append("Суммарная ценность: ")
+        toPrint.append("Оптимальное заполнение рюкзака:\n----------------------------\nСуммарная ценность: ")
                 .append(price)
                 .append("\nСуммарная масса: ")
                 .append(mass);
@@ -49,14 +47,14 @@ public class Items implements Comparable<Items> {
                     .append(" - ")
                     .append(list.get(item))
                     .append(" штук.");
-        return toPrint;
+        return toPrint.toString();
     }
 
     public int compareTo(Items items) {
-        return items.getPrice().compareTo(price);
+        return Integer.compare(items.getPrice(), price);
     }
 
     public Map<Item, Integer> getList() { return list; }
-    public BigDecimal getPrice() { return price; }
-    public BigDecimal getMass() { return mass; }
+    public int getPrice() { return price; }
+    public int getMass() { return mass; }
 }

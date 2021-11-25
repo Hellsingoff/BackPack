@@ -1,8 +1,6 @@
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.math.BigDecimal;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class ItemsTest {
@@ -10,9 +8,9 @@ class ItemsTest {
 
     @BeforeAll
     static void createTestItems() {
-        item0 = new Item(BigDecimal.valueOf(4), BigDecimal.valueOf(5));
-        item1 = new Item(BigDecimal.valueOf(2), BigDecimal.valueOf(1));
-        item2 = new Item(BigDecimal.valueOf(1), BigDecimal.valueOf(100));
+        item0 = new Item(4, 5);
+        item1 = new Item(2, 1);
+        item2 = new Item(1, 100);
     }
 
     @Test
@@ -23,8 +21,8 @@ class ItemsTest {
         items.add(item1);
         items.add(item2);
 
-        assertEquals(items.getMass().compareTo(BigDecimal.valueOf(9)), 0);
-        assertEquals(items.getPrice().compareTo(BigDecimal.valueOf(107)), 0);
+        assertEquals(items.getMass(),9);
+        assertEquals(items.getPrice(),107);
     }
 
     @Test
@@ -35,8 +33,8 @@ class ItemsTest {
         items.add(item2, 1);
         items.add(item0, 4);
 
-        assertEquals(items.getMass().compareTo(BigDecimal.valueOf(55)), 0);
-        assertEquals(items.getPrice().compareTo(BigDecimal.valueOf(145)), 0);
+        assertEquals(items.getMass(), 55);
+        assertEquals(items.getPrice(), 145);
     }
 
     @Test
