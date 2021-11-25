@@ -22,10 +22,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92bee67e-20ee-4c23-9b39-1e1f453e36d0" name="Default Changelist" comment="bp test failed">
+    <list default="true" id="92bee67e-20ee-4c23-9b39-1e1f453e36d0" name="Default Changelist" comment="today">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Backpack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backpack.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BackpackTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackpackTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -165,7 +163,14 @@
       <option name="project" value="LOCAL" />
       <updated>1637669215731</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="today">
+      <created>1637827609759</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1637827609759</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -184,7 +189,8 @@
     <MESSAGE value="edit Item" />
     <MESSAGE value="reworked" />
     <MESSAGE value="bp test failed" />
-    <option name="LAST_COMMIT_MESSAGE" value="bp test failed" />
+    <MESSAGE value="today" />
+    <option name="LAST_COMMIT_MESSAGE" value="today" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
