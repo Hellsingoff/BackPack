@@ -34,11 +34,11 @@ public class Backpack {
             Items items = new Items(greedFilled);
             for (int j = n; j >= 0; j--) {
                 int availableMass = bp - items.getMass();
-                if (availableMass >= itemList.get(n).getMass()) {
-                    items.add(itemList.get(n));
-                    fillTheBackpack(new Items(items), itemList, n, result);
+                if (availableMass >= itemList.get(j).getMass()) {
+                    items.add(itemList.get(j));
+                    fillTheBackpack(new Items(items), itemList, j, result);
                 } else if (availableMass >= itemList.get(0).getMass())
-                    fillTheBackpack(new Items(items), itemList, n - 1, result);
+                    fillTheBackpack(new Items(items), itemList, j - 1, result);
                 else {
                     if (result[0].getPrice() < items.getPrice())
                         result[0] = items;

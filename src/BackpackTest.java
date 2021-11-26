@@ -29,14 +29,13 @@ class BackpackTest {
         for (int n = 0; n < tests; n++) {
             final ArrayList<Item> itemList = new ArrayList<>();
             for (int i = 0; i < itemsNumber; i++)
-                itemList.add(new Item((int) (Math.random()*30 + 10), (int) (Math.random()*30 + 10)));
+                itemList.add(new Item((int) (Math.random()*30.999) + 1, (int) (Math.random()*30.999) + 1));
             ArrayList<Item> clearedList = new ArrayList<>(itemList);
             Backpack.removeUseless(clearedList);
             Items cleanResult = Backpack.fillTheBackpack(new Items(), clearedList);
             Items result = Backpack.fillTheBackpack(new Items(), itemList);
             itemsCounter += clearedList.size();
             assertEquals(result.getPrice(), cleanResult.getPrice());
-            System.out.println(n);
         }
         System.out.println("Тест удаления успешно пройден.\n" +
                 "Удалено " + (1 - ((double) itemsCounter / (tests*itemsNumber))) * 100 + "% предметов\n" +

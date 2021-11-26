@@ -22,14 +22,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92bee67e-20ee-4c23-9b39-1e1f453e36d0" name="Default Changelist" comment="idea">
+    <list default="true" id="92bee67e-20ee-4c23-9b39-1e1f453e36d0" name="Default Changelist" comment="today">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Backpack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backpack.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BackpackTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackpackTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Item.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ItemTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ItemTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Items.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Items.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ItemsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ItemsTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,56 +83,46 @@
       <module name="Backpack" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="BackpackTest" />
-      <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BackpackTest.fillTheBackpack" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ItemTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Backpack" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="BackpackTest" />
-      <option name="METHOD_NAME" value="fillTheBackpack" />
+      <option name="MAIN_CLASS_NAME" value="ItemTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ItemTest.compareTo" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Backpack" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="ItemTest" />
+      <option name="METHOD_NAME" value="compareTo" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BackpackTest.greed" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ItemsTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Backpack" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="BackpackTest" />
-      <option name="METHOD_NAME" value="greed" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="MAIN_CLASS_NAME" value="ItemsTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BackpackTest.removeUseless" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Backpack" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="BackpackTest" />
-      <option name="METHOD_NAME" value="removeUseless" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <list>
-      <item itemvalue="Application.Backpack" />
-      <item itemvalue="JUnit.BackpackTest" />
-      <item itemvalue="JUnit.BackpackTest.fillTheBackpack" />
-      <item itemvalue="JUnit.BackpackTest.removeUseless" />
-      <item itemvalue="JUnit.BackpackTest.greed" />
-    </list>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.BackpackTest" />
-        <item itemvalue="JUnit.BackpackTest.greed" />
-        <item itemvalue="JUnit.BackpackTest.removeUseless" />
-        <item itemvalue="JUnit.BackpackTest.fillTheBackpack" />
         <item itemvalue="Application.Backpack" />
+        <item itemvalue="JUnit.ItemsTest" />
+        <item itemvalue="JUnit.ItemTest" />
+        <item itemvalue="JUnit.ItemTest.compareTo" />
       </list>
     </recent_temporary>
   </component>
@@ -172,19 +159,19 @@
       <option name="project" value="LOCAL" />
       <updated>1616959094935</updated>
     </task>
-    <task id="LOCAL-00004" summary="wtf 0 price result">
-      <created>1637846234709</created>
+    <task id="LOCAL-00004" summary="bp test failed">
+      <created>1637669215731</created>
       <option name="number" value="00004" />
       <option name="presentableId" value="LOCAL-00004" />
       <option name="project" value="LOCAL" />
-      <updated>1637846234709</updated>
+      <updated>1637669215731</updated>
     </task>
-    <task id="LOCAL-00005" summary="idea">
-      <created>1637846267854</created>
+    <task id="LOCAL-00005" summary="today">
+      <created>1637827609759</created>
       <option name="number" value="00005" />
       <option name="presentableId" value="LOCAL-00005" />
       <option name="project" value="LOCAL" />
-      <updated>1637846267854</updated>
+      <updated>1637827609759</updated>
     </task>
     <option name="localTasksCounter" value="6" />
     <servers />
@@ -204,182 +191,157 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="edit Item" />
     <MESSAGE value="reworked" />
-    <MESSAGE value="wtf 0 price result" />
-    <MESSAGE value="idea" />
-    <option name="LAST_COMMIT_MESSAGE" value="idea" />
+    <MESSAGE value="bp test failed" />
+    <MESSAGE value="today" />
+    <option name="LAST_COMMIT_MESSAGE" value="today" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Backpack.java</url>
-          <line>69</line>
-          <option name="timeStamp" value="39" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Backpack.java</url>
-          <line>70</line>
-          <option name="timeStamp" value="40" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Backpack.java</url>
-          <line>71</line>
-          <option name="timeStamp" value="41" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Backpack.java</url>
-          <line>72</line>
-          <option name="timeStamp" value="42" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Backpack.java</url>
-          <line>74</line>
-          <option name="timeStamp" value="43" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Backpack.java</url>
-          <line>73</line>
-          <option name="timeStamp" value="44" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Backpack.java</url>
-          <line>75</line>
-          <option name="timeStamp" value="45" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Backpack.java</url>
-          <line>76</line>
-          <option name="timeStamp" value="46" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Backpack.java</url>
-          <line>77</line>
-          <option name="timeStamp" value="47" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Backpack.java</url>
-          <line>78</line>
-          <option name="timeStamp" value="48" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Backpack.java</url>
-          <line>79</line>
-          <option name="timeStamp" value="49" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Backpack.java</url>
-          <line>80</line>
-          <option name="timeStamp" value="50" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Backpack.java</url>
-          <line>82</line>
-          <option name="timeStamp" value="51" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Backpack.java</url>
-          <line>81</line>
-          <option name="timeStamp" value="52" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Backpack.java</url>
-          <line>83</line>
-          <option name="timeStamp" value="53" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Backpack.java</url>
-          <line>84</line>
-          <option name="timeStamp" value="54" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Backpack.java</url>
-          <line>85</line>
-          <option name="timeStamp" value="55" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Backpack.java</url>
-          <line>86</line>
-          <option name="timeStamp" value="56" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Backpack.java</url>
-          <line>87</line>
-          <option name="timeStamp" value="57" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Backpack.java</url>
-          <line>89</line>
-          <option name="timeStamp" value="58" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Backpack.java</url>
-          <line>88</line>
-          <option name="timeStamp" value="59" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Backpack.java</url>
           <line>32</line>
-          <option name="timeStamp" value="60" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Backpack.java</url>
-          <line>33</line>
-          <option name="timeStamp" value="61" />
+          <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Backpack.java</url>
           <line>34</line>
-          <option name="timeStamp" value="62" />
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Backpack.java</url>
+          <line>33</line>
+          <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Backpack.java</url>
           <line>35</line>
-          <option name="timeStamp" value="63" />
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Backpack.java</url>
           <line>36</line>
-          <option name="timeStamp" value="64" />
+          <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Backpack.java</url>
           <line>37</line>
-          <option name="timeStamp" value="65" />
+          <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Backpack.java</url>
           <line>38</line>
-          <option name="timeStamp" value="66" />
+          <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Backpack.java</url>
           <line>39</line>
-          <option name="timeStamp" value="67" />
+          <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Backpack.java</url>
           <line>40</line>
-          <option name="timeStamp" value="68" />
+          <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Backpack.java</url>
           <line>41</line>
-          <option name="timeStamp" value="69" />
+          <option name="timeStamp" value="10" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Backpack.java</url>
           <line>42</line>
-          <option name="timeStamp" value="70" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Backpack.java</url>
-          <line>43</line>
-          <option name="timeStamp" value="72" />
+          <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Backpack.java</url>
           <line>44</line>
-          <option name="timeStamp" value="73" />
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Backpack.java</url>
+          <line>69</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Backpack.java</url>
+          <line>71</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Backpack.java</url>
+          <line>72</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Backpack.java</url>
+          <line>73</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Backpack.java</url>
+          <line>70</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Backpack.java</url>
+          <line>74</line>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Backpack.java</url>
+          <line>75</line>
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Backpack.java</url>
+          <line>76</line>
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Backpack.java</url>
+          <line>77</line>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Backpack.java</url>
+          <line>78</line>
+          <option name="timeStamp" value="24" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Backpack.java</url>
+          <line>79</line>
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Backpack.java</url>
+          <line>80</line>
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Backpack.java</url>
+          <line>81</line>
+          <option name="timeStamp" value="29" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Backpack.java</url>
+          <line>83</line>
+          <option name="timeStamp" value="30" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Backpack.java</url>
+          <line>82</line>
+          <option name="timeStamp" value="31" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Backpack.java</url>
+          <line>43</line>
+          <option name="timeStamp" value="33" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Backpack.java</url>
+          <line>45</line>
+          <option name="timeStamp" value="35" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
