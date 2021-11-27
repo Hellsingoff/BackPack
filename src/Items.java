@@ -2,7 +2,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Items implements Comparable<Items> {
-    private final Map<Item, Integer> list;
+    private Map<Item, Integer> list;
     private int price, mass;
 
     Items() {
@@ -31,6 +31,12 @@ public class Items implements Comparable<Items> {
         else list.put(item, num);
         price += item.getPrice() * num;
         mass += item.getMass() * num;
+    }
+
+    public void clone(Items items) {
+        this.mass = items.getMass();
+        this.price = items.getPrice();
+        this.list = new HashMap<>(items.getList());
     }
 
     public String toString() {

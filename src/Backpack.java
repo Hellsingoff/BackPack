@@ -1,13 +1,11 @@
-import java.awt.Desktop;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.*;
 
 public class Backpack {
     private static int bp = 30;
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         System.out.println("Введите параметры вещей для размещения в рюкзаке и его грузоподъемность.\n" +
                 "Значения округляются до тысячных долей.\n" +
                 "Для добавления предмета - \"вес цена\", для изменения грузоподъемности - \"вес\".\n" +
@@ -24,24 +22,24 @@ public class Backpack {
     }
 
     protected static Items fillTheBackpack(Items greedFilled, ArrayList<Item> itemList){
-        Items[] result = new Items[] {new Items()};
+        Items result = new Items();
         fillTheBackpack(greedFilled, itemList, itemList.size() - 1, result);
-        return result[0];
+        return result;
     }
 
-    protected static void fillTheBackpack(Items greedFilled, ArrayList<Item> itemList, int n, Items[] result){
+    protected static void fillTheBackpack(Items greedFilled, ArrayList<Item> itemList, int n, Items result){
         for (; n >= 0; n--) {
             Items items = new Items(greedFilled);
             for (int j = n; j >= 0; j--) {
                 int availableMass = bp - items.getMass();
                 if (availableMass >= itemList.get(j).getMass()) {
                     items.add(itemList.get(j));
-                    fillTheBackpack(new Items(items), itemList, j, result);
+                    fillTheBackpack(items, itemList, j, result);
                 } else if (availableMass >= itemList.get(0).getMass())
-                    fillTheBackpack(new Items(items), itemList, j - 1, result);
+                    fillTheBackpack(items, itemList, j - 1, result);
                 else {
-                    if (result[0].getPrice() < items.getPrice())
-                        result[0] = items;
+                    if (result.getPrice() < items.getPrice())
+                        result.clone(items);
                     break;
                 }
             }
@@ -90,7 +88,7 @@ public class Backpack {
         }
     }
 
-    private static ArrayList<Item> inputItems(Scanner input) throws IOException {
+    private static ArrayList<Item> inputItems(Scanner input) {
         ArrayList<Item> itemList = new ArrayList<>();
         String inputStr;
         label:
@@ -98,7 +96,7 @@ public class Backpack {
             inputStr = input.nextLine().toLowerCase().trim();
             switch (inputStr) {
                 case "файл":
-                    String path = new File("").getAbsolutePath() + File.separator + "Backpack.txt";
+                    String path = new File("").getAbsolutePath() + File.separator + "backpack.txt";
                     try {
                         Scanner reader = new Scanner(new File(path));
                         if (reader.hasNextInt())
@@ -110,7 +108,7 @@ public class Backpack {
                             itemList.add(new Item(Integer.parseInt(item[0]), Integer.parseInt(item[1])));
                         }
                         reader.close();
-                        Desktop.getDesktop().edit(new File(path)); //test
+                        break label;
                     } catch (FileNotFoundException e) {
                         System.out.println("Файл Backpack.txt в директории программы не найден!");
                     }

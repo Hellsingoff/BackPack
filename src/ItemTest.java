@@ -3,6 +3,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ItemTest {
 
+    // Тест сравнения объектов для работоспособности сортировки
     @Test
     void compareTo() {
         Item item0 = new Item(4, 5);
