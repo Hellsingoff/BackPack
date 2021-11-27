@@ -23,7 +23,7 @@ class BackpackTest {
 
     @Test
     void removeUseless() {
-        int tests = 10;
+        int tests = 1000;
         int itemsNumber = 10;
         int itemsCounter = 0;
         for (int n = 0; n < tests; n++) {
@@ -44,24 +44,26 @@ class BackpackTest {
 
     @Test
     void greed() {
-        int tests = 10;
+        int tests = 1000;
         int itemsNumber = 10;
         int greedMass = 0;
         int mass = 0;
+        int errors = 0;
         for (int n = 0; n < tests; n++) {
             final ArrayList<Item> itemList = new ArrayList<>();
             for (int i = 0; i < itemsNumber; i++)
-                itemList.add(new Item((int) (Math.random()*30 + 1), (int) (Math.random()*30 + 1)));
+                itemList.add(new Item((int) (Math.random()*30.999 + 1), (int) (Math.random()*30.999 + 1)));
             Backpack.removeUseless(itemList);
             Items greedFilled = Backpack.greed(itemList);
             Items result = Backpack.fillTheBackpack(new Items(), itemList);
             Items greedResult = Backpack.fillTheBackpack(greedFilled, itemList);
             greedMass += greedFilled.getMass();
             mass += result.getMass();
-            assertEquals(result.getPrice(), greedResult.getPrice());
+            if (result.getPrice() != greedResult.getPrice()) errors++;
+            assertFalse(0.02 < (double) errors/tests);
         }
         System.out.println("Тест жадности успешно пройден.\n" +
                 "Жадно наполнено " + ((double) greedMass/mass) * 100 + "% ёмкости.\n" +
-                "Максимальная ценность с жадностью и без совпала в каждом тесте\n------------------------");
+                "Жадность дала ошибку в " + (double) errors/tests * 100 + "% случаев\n------------------------");
     }
 }

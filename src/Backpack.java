@@ -59,7 +59,7 @@ public class Backpack {
         for (Item item : items) {
             double temp = topGreed*2 - item.getGreed();
             int num = (int) (topGreed / temp * greedFilled);
-            if (num < min) min = num;
+            if (num < min) min = num - 1;
         }
         Items result = new Items();
         if (min > 0 && min < Integer.MAX_VALUE) result.add(topItem, min);
