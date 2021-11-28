@@ -21,12 +21,14 @@ public class Backpack {
         input.close();
     }
 
+    // наполнение рюкзака перебором, перегрузка для более простого вызова метода
     protected static Items fillTheBackpack(Items greedFilled, ArrayList<Item> itemList){
         Items result = new Items();
         fillTheBackpack(greedFilled, itemList, itemList.size() - 1, result);
         return result;
     }
 
+    // основная логика пнаполнения рюкзака перебором
     protected static void fillTheBackpack(Items greedFilled, ArrayList<Item> itemList, int n, Items result){
         for (; n >= 0; n--) {
             Items items = new Items(greedFilled);
@@ -46,6 +48,7 @@ public class Backpack {
         }
     }
 
+    // частичное наполнение рюкзака без перебора
     static Items greed(ArrayList<Item> items) {
         int min = Integer.MAX_VALUE;
         Item topItem = new Item(1, 1);
@@ -64,6 +67,7 @@ public class Backpack {
         return result;
     }
 
+    // удаление бесполезных предметов перед перебором
     static void removeUseless(ArrayList<Item> items) {
         Collections.sort(items);
         outsideLoop:
@@ -88,6 +92,7 @@ public class Backpack {
         }
     }
 
+    // обработка ввода данных от пользователя
     private static ArrayList<Item> inputItems(Scanner input) {
         ArrayList<Item> itemList = new ArrayList<>();
         String inputStr;
@@ -154,6 +159,7 @@ public class Backpack {
         return itemList;
     }
 
+    // вывод списка добавленных для перебора предметов
     private static void printItems(ArrayList<Item> items) {
         if (items.size() == 0)
             System.out.println("Предметы не добавлены.\nМакс вес: " + bp);

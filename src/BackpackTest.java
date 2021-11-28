@@ -5,7 +5,7 @@ import java.util.Collections;
 import static org.junit.jupiter.api.Assertions.*;
 
 class BackpackTest {
-
+    // тест наполнения рюкзака перебором
     @Test
     void fillTheBackpack() {
         final ArrayList<Item> itemList = new ArrayList<>();
@@ -21,6 +21,7 @@ class BackpackTest {
         System.out.println("Тест наполнения успешно пройден:\n" + result +"\n------------------------");
     }
 
+    // тест удаления бесполезных вещей
     @Test
     void removeUseless() {
         int tests = 1000;
@@ -42,6 +43,7 @@ class BackpackTest {
                 "Максимальная ценность до удаления и после удаления совпала в каждом тесте\n------------------------");
     }
 
+    // тест частичного наполнения рюкзака по формуле, оценка его погрешности
     @Test
     void greed() {
         int tests = 1000;

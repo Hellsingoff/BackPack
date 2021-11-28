@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ItemsTest {
     private static Item item0, item1, item2;
 
+    // создание нескольких предметов для тестирования комплектов
     @BeforeAll
     static void createTestItems() {
         item0 = new Item(4, 5);
@@ -13,6 +14,7 @@ class ItemsTest {
         item2 = new Item(1, 100);
     }
 
+    // тест добавления 1 предмета в комплект
     @Test
     void add() {
         Items items = new Items();
@@ -25,6 +27,7 @@ class ItemsTest {
         assertEquals(items.getPrice(),107);
     }
 
+    // тест добавления нескольких предметов в комплект
     @Test
     void multipleAdd() {
         Items items = new Items();
@@ -35,22 +38,5 @@ class ItemsTest {
 
         assertEquals(items.getMass(), 55);
         assertEquals(items.getPrice(), 145);
-    }
-
-    @Test
-    void compareTo() {
-        Items items0 = new Items();
-        items0.add(item0);
-        Items items1 = new Items(items0);
-
-        assertEquals(items0.compareTo(items1), 0);
-
-        items0.add(item2);
-
-        assertEquals(items0.compareTo(items1), -1);
-
-        items1.add(item1, 101);
-
-        assertEquals(items0.compareTo(items1), 1);
     }
 }

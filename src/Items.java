@@ -1,7 +1,7 @@
 import java.util.HashMap;
 import java.util.Map;
 
-public class Items implements Comparable<Items> {
+public class Items {
     private Map<Item, Integer> list;
     private int price, mass;
 
@@ -11,12 +11,14 @@ public class Items implements Comparable<Items> {
         mass = 0;
     }
 
+    // конструктор для создания копии объекта (immutable поведение)
     Items(Items items) {
         list = new HashMap<>(items.getList());
         price = items.getPrice();
         mass = items.getMass();
     }
 
+    // добавление одного предмета в комплект
     public void add(Item item) {
         if (list.containsKey(item))
             list.put(item, list.get(item) + 1);
@@ -25,6 +27,7 @@ public class Items implements Comparable<Items> {
         mass += item.getMass();
     }
 
+    //добавление нескольких предметов в комплект
     public void add(Item item, int num) {
         if (list.containsKey(item))
             list.put(item, list.get(item) + num);
@@ -33,12 +36,14 @@ public class Items implements Comparable<Items> {
         mass += item.getMass() * num;
     }
 
+    // метод для создания копирования другого объекта (mutable поведение)
     public void clone(Items items) {
         this.mass = items.getMass();
         this.price = items.getPrice();
         this.list = new HashMap<>(items.getList());
     }
 
+    // приведение к строке для вывода результата
     public String toString() {
         StringBuilder toPrint = new StringBuilder();
         toPrint.append("Оптимальное заполнение рюкзака:\n----------------------------\nСуммарная ценность: ")
@@ -54,10 +59,6 @@ public class Items implements Comparable<Items> {
                     .append(list.get(item))
                     .append(" штук.");
         return toPrint.toString();
-    }
-
-    public int compareTo(Items items) {
-        return Integer.compare(items.getPrice(), price);
     }
 
     public Map<Item, Integer> getList() { return list; }

@@ -8,6 +8,7 @@ class Item implements Comparable<Item> {
         greed = (double) price/mass;
     }
 
+    // метод для работы компаратора чтобы сортировать объекты
     public int compareTo(Item item) {
         if (item.getMass() == mass)
             return Integer.compare(item.getPrice(), price);
