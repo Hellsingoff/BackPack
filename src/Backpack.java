@@ -104,18 +104,24 @@ public class Backpack {
                     String path = new File("").getAbsolutePath() + File.separator + "backpack.txt";
                     try {
                         Scanner reader = new Scanner(new File(path));
-                        if (reader.hasNextInt())
-                            bp = reader.nextInt();
                         while (reader.hasNextLine()) {
-                            String line = reader.nextLine();
-                            if (line.isBlank()) continue;
-                            String[] item = line.split(" ");
-                            itemList.add(new Item(Integer.parseInt(item[0]), Integer.parseInt(item[1])));
+                            try {
+                                String line = reader.nextLine();
+                                if (line.isEmpty()) continue;
+                                String[] item = line.split(" ");
+                                if (line.length() == 1)
+                                    bp = Integer.parseInt(item[0]);
+                                else
+                                    itemList.add(new Item(Integer.parseInt(item[0]), Integer.parseInt(item[1])));
+                            } catch (NumberFormatException e) {
+                                System.out.println("Ошибка при чтении данных из файла.");
+                            }
                         }
                         reader.close();
+                        printItems(itemList);
                         break label;
                     } catch (FileNotFoundException e) {
-                        System.out.println("Файл Backpack.txt в директории программы не найден!");
+                        System.out.println("Файл backpack.txt в директории программы не найден!");
                     }
                     break;
                 case "начать":
