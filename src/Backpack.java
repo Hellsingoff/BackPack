@@ -78,9 +78,7 @@ public class Backpack {
                 continue;
             }
             for (int j = n - 1; j >= 0; j--) {
-                boolean useless1 = firstMass/items.get(j).getMass()*items.get(j).getPrice() >= items.get(n).getPrice();
-                boolean useless2 = items.get(n).getPrice() < items.get(j).getPrice();
-                if (useless1 || useless2) {
+                if (firstMass/items.get(j).getMass() * items.get(j).getPrice() >= items.get(n).getPrice()) {
                     items.remove(n);
                     continue outsideLoop;
                 }
